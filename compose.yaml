@@ -1,0 +1,19 @@
+services:
+  roleplay-studio:
+    build:
+      context: .
+      dockerfile: Containerfile
+    ports:
+      - "3000:3000"
+    environment:
+      OLLAMA_BASE_URL: http://host.containers.internal:11434
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen3:8b}
+      DATA_DIR: /app/data
+    volumes:
+      - roleplay-data:/app/data
+    extra_hosts:
+      - "host.containers.internal:host-gateway"
+    restart: unless-stopped
+
+volumes:
+  roleplay-data:
