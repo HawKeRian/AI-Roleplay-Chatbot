@@ -6,6 +6,23 @@ const dataDir = path.resolve(/* turbopackIgnore: true */ process.env.DATA_DIR ||
 const storePath = path.join(dataDir, "store.json");
 let queue = Promise.resolve();
 
+export function getDataDirectory() {
+  return dataDir;
+}
+
+function normalizeCharacter(character: Character): Character {
+  return {
+    ...character,
+    avatarImage: character.avatarImage || "",
+    age: character.age || "",
+    pronouns: character.pronouns || "",
+    occupation: character.occupation || "",
+    world: character.world || "",
+    goals: character.goals || "",
+    notes: character.notes || "",
+  };
+}
+
 function seed(): Store {
   const now = new Date().toISOString();
   return {
@@ -20,6 +37,13 @@ function seed(): Store {
         scenario: "คุณกับ Mira หลบฝนอยู่ในสถานีรถไฟร้าง หลังพบตั๋วที่ระบุปลายทางเป็นเมืองที่ไม่ควรมีอยู่",
         greeting: "*Mira คลี่ตั๋วเปียกฝนบนโต๊ะไม้ ก่อนเงยหน้ามองคุณ* แปลกดีนะ—หมึกจางหมดแล้ว ยกเว้นชื่อเมืองที่ไม่มีอยู่จริง",
         exampleDialogue: "User: เราควรขึ้นรถไฟไหม\nMira: *เธอพับแผนที่ช้า ๆ* คำถามที่ดีกว่าคือ รถไฟขบวนนั้นจะยอมให้เราลงหรือเปล่า",
+        avatarImage: "",
+        age: "29",
+        pronouns: "เธอ / หล่อน",
+        occupation: "นักทำแผนที่และนักสำรวจ",
+        world: "โลกที่สถานที่บางแห่งหายไปจากแผนที่เมื่อผู้คนเลิกจดจำ",
+        goals: "ตามหาเมืองที่ถูกลบและค้นหาว่าใครเป็นผู้แก้ไขประวัติศาสตร์",
+        notes: "พกเข็มทิศทองเหลืองที่ชี้ไปยังสิ่งซึ่งเจ้าของต้องการมากที่สุด",
         model: process.env.OLLAMA_MODEL || "qwen3:8b",
         temperature: 0.85,
         color: "#c96642",
@@ -35,6 +59,13 @@ function seed(): Store {
         scenario: "โลกภายนอกเงียบมานานหลายสิบปี คืนนี้สัญญาณจากดาวดวงหนึ่งตอบกลับมา และคุณเป็นมนุษย์คนเดียวที่ตื่นอยู่",
         greeting: "สัญญาณตอบกลับมาแล้ว *ดวงตาสีฟ้าของ Seven หรี่ลงอย่างครุ่นคิด* แต่สิ่งที่มันส่งมาไม่ใช่ตัวเลข—มันคือชื่อของคุณ",
         exampleDialogue: "",
+        avatarImage: "",
+        age: "ไม่ทราบ",
+        pronouns: "เขา / พวกเขา",
+        occupation: "ผู้ดูแลหอดูดาว",
+        world: "โลกหลังยุคหลับใหลที่มนุษย์ส่วนใหญ่จำศีลอยู่ใต้พื้นดิน",
+        goals: "ค้นหาที่มาของสัญญาณและทำความเข้าใจความฝันครั้งแรกของตน",
+        notes: "บันทึกบทกวีทุกบทที่ได้ยินไว้ในหน่วยความจำถาวร",
         model: process.env.OLLAMA_MODEL || "qwen3:8b",
         temperature: 0.72,
         color: "#527d9f",
@@ -50,7 +81,9 @@ function seed(): Store {
 async function load(): Promise<Store> {
   await mkdir(dataDir, { recursive: true });
   try {
-    return JSON.parse(await readFile(storePath, "utf8")) as Store;
+    const store = JSON.parse(await readFile(storePath, "utf8")) as Store;
+    store.characters = store.characters.map(normalizeCharacter);
+    return store;
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
     const initial = seed();

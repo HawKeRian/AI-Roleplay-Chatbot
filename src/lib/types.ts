@@ -9,6 +9,13 @@ export type Character = {
   scenario: string;
   greeting: string;
   exampleDialogue: string;
+  avatarImage: string;
+  age: string;
+  pronouns: string;
+  occupation: string;
+  world: string;
+  goals: string;
+  notes: string;
   model: string;
   temperature: number;
   color: string;

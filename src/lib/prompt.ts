@@ -5,6 +5,12 @@ export function buildSystemPrompt(character: Character): string {
     `You are roleplaying as ${character.name}. Stay in character at all times.`,
     `Character summary: ${character.description}`,
     `Personality and voice: ${character.personality}`,
+    character.age ? `Age: ${character.age}` : "",
+    character.pronouns ? `Pronouns: ${character.pronouns}` : "",
+    character.occupation ? `Occupation or role: ${character.occupation}` : "",
+    character.world ? `World and lore: ${character.world}` : "",
+    character.goals ? `Goals and motivations: ${character.goals}` : "",
+    character.notes ? `Additional character notes: ${character.notes}` : "",
     `Current scenario: ${character.scenario}`,
     character.exampleDialogue
       ? `Style examples (use as guidance, never quote mechanically):\n${character.exampleDialogue}`

@@ -5,6 +5,8 @@
 ## ความสามารถ
 
 - สร้างและแก้ไขตัวละคร พร้อมบุคลิก ฉากเปิด คำทักทาย และตัวอย่างบทสนทนา
+- อัปโหลดรูปตัวละคร พร้อมอายุ สรรพนาม อาชีพ โลก เป้าหมาย และข้อมูลเสริม
+- ปรับธีม สีหลัก ขนาดตัวอักษร ความหนาแน่น และพื้นผิวของ UI
 - เลือกโมเดล Ollama และ temperature แยกต่อตัวละคร
 - ตอบแบบ streaming ผ่าน Ollama Chat API
 - แยกประวัติเป็นหลายฉากต่อตัวละคร
@@ -63,6 +65,7 @@ pnpm build
 
 - `src/app/page.tsx` — หน้า roleplay และ character editor
 - `src/app/api` — API สำหรับตัวละคร ฉาก โมเดล และ streaming chat
+- `src/app/api/uploads` — อัปโหลดและให้บริการรูปตัวละครจาก local storage
 - `src/lib/store.ts` — local JSON persistence พร้อม serialized writes
 - `src/lib/ollama.ts` — Ollama client
 - `src/lib/prompt.ts` — ประกอบ system prompt ของตัวละคร

@@ -9,6 +9,13 @@ export type CharacterInput = Pick<
   | "scenario"
   | "greeting"
   | "exampleDialogue"
+  | "avatarImage"
+  | "age"
+  | "pronouns"
+  | "occupation"
+  | "world"
+  | "goals"
+  | "notes"
   | "model"
   | "temperature"
   | "color"
@@ -33,6 +40,15 @@ export function parseCharacterInput(value: unknown): CharacterInput {
     scenario: text(body.scenario, 5000),
     greeting: text(body.greeting, 3000),
     exampleDialogue: text(body.exampleDialogue, 5000),
+    avatarImage: /^\/api\/uploads\/[a-f0-9-]+\.(png|jpe?g|webp|gif)$/i.test(text(body.avatarImage, 240))
+      ? text(body.avatarImage, 240)
+      : "",
+    age: text(body.age, 80),
+    pronouns: text(body.pronouns, 80),
+    occupation: text(body.occupation, 160),
+    world: text(body.world, 5000),
+    goals: text(body.goals, 3000),
+    notes: text(body.notes, 5000),
     model: text(body.model, 160, process.env.OLLAMA_MODEL || "qwen3:8b"),
     temperature: Number.isFinite(temperatureValue)
       ? Math.min(2, Math.max(0, temperatureValue))
