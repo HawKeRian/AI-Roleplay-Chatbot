@@ -1,0 +1,14 @@
+{
+  "display_name": "Fable Friendly UI",
+  "loading_order": 100,
+  "requires": [],
+  "optional": [],
+  "dependencies": [],
+  "js": "index.js",
+  "css": "style.css",
+  "author": "Fable Local contributors",
+  "version": "0.5.1",
+  "homePage": "https://github.com/HawKeRian/AI-Roleplay-Chatbot",
+  "auto_update": false,
+  "minimum_client_version": "1.19.0"
+}

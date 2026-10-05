@@ -71,3 +71,35 @@ pnpm build
 - `src/lib/prompt.ts` — ประกอบ system prompt ของตัวละคร
 
 ไฟล์ JSON เหมาะกับการใช้งานคนเดียวในเครื่อง หากจะเปิดหลายผู้ใช้หรือหลาย process ควรเปลี่ยนชั้น `store.ts` เป็น SQLite/PostgreSQL พร้อม authentication
+
+## ใช้งานหลักผ่าน SillyTavern
+
+Fable Friendly UI บน SillyTavern เป็นหน้าหลักสำหรับการเล่นและจัดการ Character Card ส่วน Next.js รุ่นเดิมยังคงรันแยกได้สำหรับอ้างอิง โดย installation และข้อมูลส่วนตัวของ SillyTavern จะอยู่ใน `.local/SillyTavern` ซึ่งไม่ถูก commit ขึ้น Git
+
+```powershell
+.\scripts\setup-sillytavern.ps1
+.\scripts\start-sillytavern.ps1
+.\scripts\configure-sillytavern.ps1 -Model "gup-qwen3:4b"
+```
+
+เปิด `http://127.0.0.1:8000/` ตัว configurator จะเลือก Ollama, ChatML และตั้ง `/no_think` สำหรับ Qwen3 roleplay ให้โดยอัตโนมัติ ขณะที่ Fable Local ยังเปิดแยกที่ `http://127.0.0.1:3000/` ได้ตามเดิม
+
+หยุด SillyTavern ด้วย:
+
+```powershell
+.\scripts\stop-sillytavern.ps1
+```
+
+### Friendly UI
+
+ชุดติดตั้งจะเพิ่ม extension `Fable Friendly UI` ให้ SillyTavern อัตโนมัติ โดยจัดหน้าใหม่ให้เน้นตัวละครและการแชต พร้อมตัวเลือกภาษา, Character Card Profile, Persona แยกจากการ์ด, validator, prompt preview, local translation cache และเครื่องมือสร้างตัวอย่างบทสนทนาด้วย Qwen
+
+ความจำระยะยาวใช้ Vector Storage ผ่าน Ollama และโมเดล `qwen3-embedding:0.6b` ภายในเครื่อง ขณะที่ Summarize ใช้โมเดลหลักด้วย prompt ที่ห้ามสร้างข้อเท็จจริงเพิ่ม
+
+หากแก้ extension แล้วต้องการติดตั้งซ้ำ:
+
+```powershell
+.\scripts\install-sillytavern-ui.ps1
+.\scripts\stop-sillytavern.ps1
+.\scripts\start-sillytavern.ps1
+```

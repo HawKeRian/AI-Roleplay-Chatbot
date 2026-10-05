@@ -1,0 +1,1284 @@
+body.fable-friendly-ui {
+    --fable-sidebar-width: 288px;
+    --fable-header-height: 72px;
+    --fable-page: #f7f7f9;
+    --fable-surface: #ffffff;
+    --fable-surface-soft: #f1f1f4;
+    --fable-text: #252329;
+    --fable-muted: #77737f;
+    --fable-border: #e7e5ea;
+    --fable-accent: #7657e8;
+    --fable-accent-soft: #eeeafe;
+    --fable-shadow: 0 14px 42px rgba(39, 31, 58, 0.1);
+    --SmartThemeBodyColor: var(--fable-text);
+    --SmartThemeEmColor: var(--fable-muted);
+    --SmartThemeQuoteColor: var(--fable-accent);
+    --SmartThemeBlurTintColor: var(--fable-surface);
+    --SmartThemeChatTintColor: transparent;
+    --SmartThemeUserMesBlurTintColor: var(--fable-surface-soft);
+    --SmartThemeBotMesBlurTintColor: transparent;
+    --SmartThemeBorderColor: var(--fable-border);
+    --SmartThemeShadowColor: transparent;
+    --SmartThemeBlurStrength: 0px;
+    --shadowWidth: 0;
+    --fontScale: 1.02;
+    background: var(--fable-page) !important;
+    background-image: none !important;
+    color: var(--fable-text);
+    color-scheme: light;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    overflow-x: hidden;
+}
+
+body.fable-friendly-ui.fable-dark {
+    --fable-page: #17161a;
+    --fable-surface: #211f25;
+    --fable-surface-soft: #2c2931;
+    --fable-text: #f3f1f6;
+    --fable-muted: #aaa5b1;
+    --fable-border: #38343e;
+    --fable-accent: #a890ff;
+    --fable-accent-soft: #342c51;
+    --fable-shadow: 0 14px 42px rgba(0, 0, 0, 0.32);
+    color-scheme: dark;
+}
+
+body.fable-friendly-ui * {
+    text-shadow: none;
+}
+
+#fable-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 4100;
+    display: flex;
+    width: var(--fable-sidebar-width);
+    flex-direction: column;
+    padding: 18px 14px 14px;
+    overflow: hidden;
+    color: var(--fable-text);
+    background: var(--fable-surface);
+    border-right: 1px solid var(--fable-border);
+}
+
+.fable-brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 44px;
+    padding: 0 7px 14px;
+}
+
+.fable-brand-mark {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 800;
+    background: linear-gradient(145deg, #8c6cf2, #6543d6);
+    border-radius: 13px;
+    box-shadow: 0 7px 16px rgba(118, 87, 232, 0.28);
+}
+
+.fable-brand > span:nth-child(2) {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    line-height: 1.15;
+}
+
+.fable-brand strong {
+    font-size: 17px;
+    letter-spacing: -0.02em;
+}
+
+.fable-brand small,
+.fable-current-copy small {
+    color: var(--fable-muted);
+    font-size: 12px;
+}
+
+.fable-new-character {
+    display: flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin: 2px 4px 14px;
+    color: white;
+    font-weight: 700;
+    background: var(--fable-accent);
+    border: 0;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: transform 140ms ease, filter 140ms ease;
+}
+
+.fable-new-character:hover {
+    filter: brightness(1.06);
+    transform: translateY(-1px);
+}
+
+.fable-search {
+    display: flex;
+    min-height: 42px;
+    align-items: center;
+    gap: 9px;
+    margin: 0 4px 14px;
+    padding: 0 12px;
+    color: var(--fable-muted);
+    background: var(--fable-surface-soft);
+    border: 1px solid transparent;
+    border-radius: 13px;
+}
+
+.fable-search:focus-within {
+    background: var(--fable-surface);
+    border-color: color-mix(in srgb, var(--fable-accent) 55%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--fable-accent) 12%, transparent);
+}
+
+.fable-search input {
+    width: 100%;
+    padding: 0;
+    color: var(--fable-text);
+    background: transparent;
+    border: 0;
+    outline: 0;
+}
+
+.fable-section-label {
+    padding: 0 9px 8px;
+    color: var(--fable-muted);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+#fable-character-list {
+    display: flex;
+    min-height: 0;
+    flex: 1;
+    flex-direction: column;
+    gap: 4px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.fable-character-card {
+    display: flex;
+    width: 100%;
+    min-height: 66px;
+    align-items: center;
+    gap: 11px;
+    padding: 8px;
+    color: var(--fable-text);
+    text-align: left;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.fable-character-card:hover {
+    background: var(--fable-surface-soft);
+}
+
+.fable-character-card.active {
+    background: var(--fable-accent-soft);
+    border-color: color-mix(in srgb, var(--fable-accent) 18%, transparent);
+}
+
+.fable-character-card img {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--fable-surface), 0 0 0 3px var(--fable-border);
+}
+
+.fable-character-copy {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.fable-character-copy strong,
+.fable-character-copy small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.fable-character-copy strong {
+    font-size: 14px;
+}
+
+.fable-character-copy small {
+    color: var(--fable-muted);
+    font-size: 12px;
+}
+
+.fable-empty-list {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 7px;
+    padding: 28px 18px;
+    color: var(--fable-muted);
+    text-align: center;
+}
+
+.fable-empty-list i {
+    margin-bottom: 4px;
+    font-size: 28px;
+}
+
+.fable-empty-list strong {
+    color: var(--fable-text);
+}
+
+.fable-sidebar-footer {
+    display: grid;
+    gap: 4px;
+    padding-top: 12px;
+    border-top: 1px solid var(--fable-border);
+}
+
+.fable-sidebar-footer button {
+    display: flex;
+    min-height: 40px;
+    align-items: center;
+    gap: 10px;
+    padding: 0 11px;
+    color: var(--fable-muted);
+    text-align: left;
+    background: transparent;
+    border: 0;
+    border-radius: 11px;
+    cursor: pointer;
+}
+
+.fable-sidebar-footer button:hover {
+    color: var(--fable-text);
+    background: var(--fable-surface-soft);
+}
+
+#fable-chat-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: var(--fable-sidebar-width);
+    z-index: 3050;
+    display: flex;
+    height: var(--fable-header-height);
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 22px;
+    background: color-mix(in srgb, var(--fable-page) 88%, transparent);
+    border-bottom: 1px solid var(--fable-border);
+    backdrop-filter: blur(16px);
+}
+
+#fable-current-character {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 8px 4px 4px;
+    color: var(--fable-text);
+    text-align: left;
+    background: transparent;
+    border: 0;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+#fable-current-character:hover {
+    background: var(--fable-surface-soft);
+}
+
+#fable-current-avatar {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 50%;
+    background: var(--fable-surface-soft);
+}
+
+.fable-current-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.fable-current-copy strong {
+    overflow: hidden;
+    max-width: 36vw;
+    font-size: 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#fable-current-status span {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 2px;
+    background: #35b36c;
+    border-radius: 50%;
+}
+
+#fable-current-status.offline span {
+    background: #db665d;
+}
+
+.fable-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.fable-language-control {
+    position: relative;
+}
+
+.fable-language-button {
+    display: flex;
+    min-width: 112px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 12px;
+    color: var(--fable-text);
+    font-size: 13px;
+    font-weight: 700;
+    background: var(--fable-surface);
+    border: 1px solid var(--fable-border);
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.fable-language-button:hover,
+.fable-language-button[aria-expanded="true"] {
+    color: var(--fable-accent);
+    background: var(--fable-accent-soft);
+    border-color: color-mix(in srgb, var(--fable-accent) 35%, var(--fable-border));
+}
+
+.fable-language-button .fa-chevron-down {
+    color: var(--fable-muted);
+    font-size: 9px;
+    transition: transform 140ms ease;
+}
+
+.fable-language-button[aria-expanded="true"] .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.fable-language-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    z-index: 4200;
+    display: none;
+    width: min(360px, calc(100dvw - 24px));
+    padding: 10px;
+    color: var(--fable-text);
+    background: var(--fable-surface);
+    border: 1px solid var(--fable-border);
+    border-radius: 18px;
+    box-shadow: var(--fable-shadow);
+}
+
+.fable-language-menu.open {
+    display: block;
+    animation: fable-language-in 140ms ease-out;
+}
+
+@keyframes fable-language-in {
+    from {
+        opacity: 0;
+        transform: translateY(-5px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.fable-language-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 7px 8px 11px;
+    border-bottom: 1px solid var(--fable-border);
+}
+
+.fable-language-heading > span:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.fable-language-heading strong {
+    font-size: 14px;
+}
+
+.fable-language-heading small {
+    color: var(--fable-muted);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.fable-local-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 7px;
+    color: #258653;
+    font-size: 10px;
+    font-weight: 800;
+    background: color-mix(in srgb, #42b979 13%, transparent);
+    border-radius: 999px;
+}
+
+.fable-language-options {
+    display: grid;
+    max-height: min(390px, 58dvh);
+    gap: 3px;
+    padding: 8px 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.fable-language-option {
+    display: grid;
+    min-height: 44px;
+    grid-template-columns: 28px minmax(0, 1fr) 20px;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 9px;
+    color: var(--fable-text);
+    text-align: left;
+    background: transparent;
+    border: 0;
+    border-radius: 11px;
+    cursor: pointer;
+}
+
+.fable-language-option:hover {
+    background: var(--fable-surface-soft);
+}
+
+.fable-language-option.active {
+    color: var(--fable-accent);
+    background: var(--fable-accent-soft);
+}
+
+.fable-language-option > i:first-child {
+    color: var(--fable-muted);
+}
+
+.fable-language-option.active > i:first-child {
+    color: var(--fable-accent);
+}
+
+.fable-language-option > span {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.fable-language-option strong {
+    font-size: 13px;
+}
+
+.fable-language-option small {
+    color: var(--fable-muted);
+    font-size: 10px;
+}
+
+.fable-language-option > .fa-check {
+    visibility: hidden;
+    font-size: 11px;
+}
+
+.fable-language-option.active > .fa-check {
+    visibility: visible;
+}
+
+.fable-language-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0;
+    padding: 9px;
+    color: var(--fable-muted);
+    font-size: 10px;
+    line-height: 1.4;
+    background: var(--fable-surface-soft);
+    border-radius: 10px;
+}
+
+.fable-language-note i {
+    margin-top: 2px;
+    color: #258653;
+}
+
+.fable-profile-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 6000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(20, 17, 27, 0.52);
+    backdrop-filter: blur(6px);
+}
+
+.fable-profile-modal.open {
+    display: flex;
+}
+
+.fable-profile-dialog {
+    display: flex;
+    width: min(820px, 96dvw);
+    max-height: min(880px, 92dvh);
+    flex-direction: column;
+    overflow: hidden;
+    color: var(--fable-text);
+    background: var(--fable-surface);
+    border: 1px solid var(--fable-border);
+    border-radius: 22px;
+    box-shadow: 0 24px 80px rgba(15, 10, 25, 0.32);
+}
+
+.fable-profile-header {
+    display: flex;
+    min-height: 70px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--fable-border);
+}
+
+.fable-profile-header > span {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.fable-profile-header strong {
+    font-size: 18px;
+    letter-spacing: -0.02em;
+}
+
+.fable-profile-header small {
+    overflow: hidden;
+    color: var(--fable-muted);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#fable-profile-form {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.fable-profile-section {
+    display: grid;
+    grid-template-columns: minmax(170px, 0.32fr) minmax(0, 1fr);
+    gap: 24px;
+    padding: 22px 20px;
+    border-bottom: 1px solid var(--fable-border);
+}
+
+.fable-profile-section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.fable-profile-section-heading strong {
+    font-size: 14px;
+}
+
+.fable-profile-section-heading small {
+    color: var(--fable-muted);
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.fable-profile-grid {
+    display: grid;
+    min-width: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.fable-profile-field {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.fable-profile-field-wide {
+    grid-column: 1 / -1;
+}
+
+.fable-profile-field-label {
+    color: var(--fable-text);
+    font-size: 11px;
+    font-weight: 750;
+}
+
+.fable-quality-content {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#fable-profile-issues {
+    display: grid;
+    gap: 6px;
+}
+
+.fable-profile-issue {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 10px;
+    color: var(--fable-muted);
+    font-size: 11px;
+    line-height: 1.4;
+    background: var(--fable-surface-soft);
+    border-radius: 9px;
+}
+
+.fable-profile-issue.success i {
+    color: #35a66a;
+}
+
+.fable-profile-issue.info i {
+    color: #4a8ccf;
+}
+
+.fable-profile-issue.warning i {
+    color: #d8952c;
+}
+
+.fable-profile-issue.error i {
+    color: #db665d;
+}
+
+#fable-prompt-token-count,
+#fable-translation-status {
+    color: var(--fable-muted);
+    font-size: 10px;
+}
+
+body.fable-friendly-ui #fable-prompt-preview,
+body.fable-friendly-ui #fable-generated-example {
+    width: 100%;
+    min-height: 120px;
+    padding: 10px 11px;
+    color: var(--fable-text);
+    font: 11px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace;
+    background: var(--fable-surface-soft);
+    border: 1px solid var(--fable-border);
+    border-radius: 10px;
+    resize: vertical;
+}
+
+body.fable-friendly-ui #fable-prompt-preview {
+    color: var(--fable-muted);
+}
+
+.fable-profile-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.fable-profile-tools button,
+.fable-profile-save-example {
+    min-height: 38px;
+    padding: 0 12px;
+    color: var(--fable-text);
+    font-size: 11px;
+    font-weight: 750;
+    background: var(--fable-surface-soft);
+    border: 1px solid var(--fable-border);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.fable-profile-tools button:hover,
+.fable-profile-save-example:hover {
+    color: var(--fable-accent);
+    border-color: color-mix(in srgb, var(--fable-accent) 38%, var(--fable-border));
+}
+
+.fable-profile-tools button:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
+.fable-profile-save-example {
+    align-self: flex-start;
+    color: white;
+    background: var(--fable-accent);
+    border-color: var(--fable-accent);
+}
+
+body.fable-friendly-ui .fable-profile-field input,
+body.fable-friendly-ui .fable-profile-field select,
+body.fable-friendly-ui .fable-profile-field textarea {
+    width: 100%;
+    min-height: 40px;
+    padding: 9px 11px;
+    color: var(--fable-text);
+    font: inherit;
+    font-size: 12px;
+    background: var(--fable-surface-soft);
+    border: 1px solid var(--fable-border);
+    border-radius: 10px;
+    outline: none;
+}
+
+body.fable-friendly-ui .fable-profile-field textarea {
+    min-height: 76px;
+    resize: vertical;
+}
+
+body.fable-friendly-ui .fable-profile-field input:focus,
+body.fable-friendly-ui .fable-profile-field select:focus,
+body.fable-friendly-ui .fable-profile-field textarea:focus {
+    background: var(--fable-surface);
+    border-color: color-mix(in srgb, var(--fable-accent) 55%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--fable-accent) 11%, transparent);
+}
+
+.fable-profile-footer {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 13px 18px;
+    background: color-mix(in srgb, var(--fable-surface) 92%, transparent);
+    border-top: 1px solid var(--fable-border);
+    backdrop-filter: blur(12px);
+}
+
+.fable-profile-footer > span {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--fable-muted);
+    font-size: 10px;
+}
+
+.fable-profile-footer > div {
+    display: flex;
+    gap: 8px;
+}
+
+.fable-profile-cancel,
+.fable-profile-save {
+    min-height: 40px;
+    padding: 0 14px;
+    font-weight: 750;
+    border-radius: 11px;
+    cursor: pointer;
+}
+
+.fable-profile-cancel {
+    color: var(--fable-text);
+    background: var(--fable-surface-soft);
+    border: 1px solid var(--fable-border);
+}
+
+.fable-profile-save {
+    color: white;
+    background: var(--fable-accent);
+    border: 1px solid var(--fable-accent);
+}
+
+.fable-profile-save:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
+.fable-icon-button {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    place-items: center;
+    color: var(--fable-muted);
+    background: transparent;
+    border: 0;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.fable-icon-button:hover,
+.fable-icon-button.active {
+    color: var(--fable-accent);
+    background: var(--fable-accent-soft);
+}
+
+.fable-mobile-menu,
+.fable-mobile-close {
+    display: none;
+}
+
+body.fable-friendly-ui #top-bar {
+    display: none;
+}
+
+body.fable-friendly-ui:not(.fable-show-advanced) #top-settings-holder {
+    display: none;
+}
+
+body.fable-friendly-ui.fable-show-advanced #top-settings-holder {
+    position: fixed;
+    top: calc(var(--fable-header-height) + 10px);
+    right: 22px;
+    z-index: 4040;
+    display: flex;
+    width: auto;
+    height: auto;
+    padding: 8px;
+    background: var(--fable-surface);
+    border: 1px solid var(--fable-border);
+    border-radius: 16px;
+    box-shadow: var(--fable-shadow);
+}
+
+body.fable-friendly-ui.fable-show-advanced #top-settings-holder > .drawer {
+    width: auto;
+}
+
+body.fable-friendly-ui #sheld {
+    top: var(--fable-header-height);
+    right: auto;
+    left: calc(var(--fable-sidebar-width) + max(28px, (100dvw - var(--fable-sidebar-width) - 820px) / 2));
+    width: min(820px, calc(100dvw - var(--fable-sidebar-width) - 56px));
+    height: calc(100dvh - var(--fable-header-height));
+    max-height: calc(100dvh - var(--fable-header-height));
+    background: transparent;
+}
+
+body.fable-friendly-ui #chat {
+    padding: 22px 10px 28px;
+    overflow-x: hidden;
+    background: transparent;
+    backdrop-filter: none;
+}
+
+body.fable-friendly-ui .welcomePanel {
+    min-width: 0;
+    gap: 12px;
+    padding: 10px 6px;
+    overflow: hidden;
+}
+
+body.fable-friendly-ui .welcomePanel .welcomeHeaderTitle,
+body.fable-friendly-ui .welcomePanel .welcomeShortcuts,
+body.fable-friendly-ui #chat .mes[type="assistant_message"] {
+    display: none;
+}
+
+body.fable-friendly-ui #chat:has(.welcomePanel) .welcomePanel ~ * {
+    display: none !important;
+}
+
+body.fable-friendly-ui .welcomePanel .welcomeHeader {
+    min-width: 0;
+    justify-content: flex-start;
+}
+
+body.fable-friendly-ui .welcomePanel .recentChatsTitle {
+    color: var(--fable-text);
+    font-size: 22px;
+    font-weight: 750;
+    letter-spacing: -0.025em;
+}
+
+body.fable-friendly-ui .welcomeRecent,
+body.fable-friendly-ui .welcomeRecent .recentChatList,
+body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat,
+body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat .recentChatInfo,
+body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat .chatNameContainer {
+    min-width: 0;
+    max-width: 100%;
+}
+
+body.fable-friendly-ui .welcomeRecent .recentChatList {
+    gap: 8px;
+}
+
+body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat {
+    padding: 10px 12px;
+    background: var(--fable-surface);
+    border-color: var(--fable-border);
+    border-radius: 16px;
+}
+
+body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat:hover {
+    background: var(--fable-accent-soft);
+}
+
+body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat .chatNameContainer .chatName {
+    min-width: 0;
+}
+
+body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat .chatActions {
+    opacity: 0;
+    transition: opacity 120ms ease;
+}
+
+body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat:hover .chatActions,
+body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat:focus-within .chatActions {
+    opacity: 1;
+}
+
+body.fable-friendly-ui #chat .mes {
+    width: 100%;
+    padding: 10px 6px;
+    color: var(--fable-text);
+    background: transparent;
+    border-radius: 18px;
+}
+
+body.fable-friendly-ui #chat .mes:not([is_user="true"]) .mesAvatarWrapper {
+    margin-right: 3px;
+}
+
+body.fable-friendly-ui #chat .mes:not([is_user="true"]) .avatar,
+body.fable-friendly-ui #chat .mes:not([is_user="true"]) .avatar img {
+    width: 42px;
+    height: 42px;
+}
+
+body.fable-friendly-ui #chat .mes_block {
+    padding-left: 12px;
+}
+
+body.fable-friendly-ui #chat .mes_text,
+body.fable-friendly-ui #chat .mes_reasoning {
+    line-height: 1.58;
+}
+
+body.fable-friendly-ui #chat .mes[is_user="true"] {
+    justify-content: flex-end;
+    padding-left: 16%;
+}
+
+body.fable-friendly-ui #chat .mes[is_user="true"] .mesAvatarWrapper,
+body.fable-friendly-ui #chat .mes[is_user="true"] .ch_name {
+    display: none;
+}
+
+body.fable-friendly-ui #chat .mes[is_user="true"] .mes_block {
+    width: auto;
+    max-width: 82%;
+    flex: 0 1 auto;
+    padding: 10px 15px;
+    background: var(--fable-surface-soft);
+    border: 1px solid var(--fable-border);
+    border-radius: 18px 18px 5px 18px;
+}
+
+body.fable-friendly-ui #chat .mes_buttons {
+    opacity: 0;
+    transition: opacity 120ms ease;
+}
+
+body.fable-friendly-ui #chat .mes:hover .mes_buttons {
+    opacity: 1;
+}
+
+body.fable-friendly-ui #form_sheld {
+    padding: 0 8px 18px;
+    background: linear-gradient(180deg, transparent, var(--fable-page) 30%);
+}
+
+body.fable-friendly-ui #send_form {
+    min-height: 58px;
+    align-items: center;
+    overflow: hidden;
+    background: var(--fable-surface);
+    border: 1px solid var(--fable-border);
+    border-radius: 22px;
+    box-shadow: var(--fable-shadow);
+    backdrop-filter: none;
+}
+
+body.fable-friendly-ui #nonQRFormItems {
+    min-width: 0;
+    align-items: center;
+    overflow: hidden;
+}
+
+body.fable-friendly-ui #send_form:has(#send_textarea:focus-visible) {
+    border-color: color-mix(in srgb, var(--fable-accent) 55%, transparent);
+    outline: 3px solid color-mix(in srgb, var(--fable-accent) 12%, transparent);
+}
+
+body.fable-friendly-ui #send_textarea {
+    min-width: 0;
+    min-height: 56px;
+    height: 56px;
+    padding: 17px 8px 12px;
+    color: var(--fable-text);
+    border-top-color: transparent;
+}
+
+body.fable-friendly-ui #leftSendForm,
+body.fable-friendly-ui #rightSendForm {
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 0 9px;
+}
+
+body.fable-friendly-ui #leftSendForm > :not(#options_button) {
+    display: none !important;
+}
+
+body.fable-friendly-ui #options_button {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    color: var(--fable-muted);
+    border-radius: 50%;
+}
+
+body.fable-friendly-ui #send_but,
+body.fable-friendly-ui #mes_stop {
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    color: white;
+    background: var(--fable-accent);
+    border-radius: 50%;
+}
+
+body.fable-friendly-ui .drawer-content,
+body.fable-friendly-ui .draggable {
+    color: var(--fable-text);
+    background: var(--fable-surface);
+    border-color: var(--fable-border);
+    box-shadow: var(--fable-shadow);
+}
+
+body.fable-friendly-ui .fillRight {
+    right: 0;
+    left: auto;
+    width: min(430px, 92dvw);
+    max-height: 100dvh;
+    background: var(--fable-surface);
+    border-left: 1px solid var(--fable-border);
+}
+
+body.fable-friendly-ui .fillLeft {
+    right: auto;
+    left: var(--fable-sidebar-width);
+    width: min(430px, calc(100dvw - var(--fable-sidebar-width)));
+    max-height: 100dvh;
+    background: var(--fable-surface);
+    border-right: 1px solid var(--fable-border);
+}
+
+body.fable-friendly-ui textarea,
+body.fable-friendly-ui input,
+body.fable-friendly-ui select {
+    color: var(--fable-text);
+    background-color: var(--fable-surface-soft);
+    border-color: var(--fable-border);
+}
+
+@media (max-width: 900px) {
+    body.fable-friendly-ui {
+        --fable-header-height: 64px;
+    }
+
+    #fable-sidebar {
+        width: min(86vw, 320px);
+        transform: translateX(-105%);
+        box-shadow: var(--fable-shadow);
+        transition: transform 180ms ease;
+    }
+
+    body.fable-sidebar-open #fable-sidebar {
+        transform: translateX(0);
+    }
+
+    .fable-mobile-menu,
+    .fable-mobile-close {
+        display: grid;
+    }
+
+    .fable-mobile-close {
+        margin-left: auto;
+    }
+
+    #fable-chat-header {
+        left: 0;
+        padding: 8px 10px;
+    }
+
+    .fable-current-copy strong {
+        max-width: 36vw;
+    }
+
+    .fable-connection-button,
+    .fable-advanced-button {
+        display: none;
+    }
+
+    .fable-language-button {
+        width: 40px;
+        min-width: 40px;
+        padding: 0;
+    }
+
+    .fable-language-button span,
+    .fable-language-button .fa-chevron-down {
+        display: none;
+    }
+
+    .fable-language-menu {
+        position: fixed;
+        top: calc(var(--fable-header-height) + 7px);
+        right: 8px;
+    }
+
+    .fable-profile-modal {
+        align-items: flex-end;
+        padding: 0;
+    }
+
+    .fable-profile-dialog {
+        width: 100dvw;
+        max-height: 94dvh;
+        border-right: 0;
+        border-bottom: 0;
+        border-left: 0;
+        border-radius: 22px 22px 0 0;
+    }
+
+    .fable-profile-section {
+        grid-template-columns: 1fr;
+        gap: 13px;
+        padding: 18px 14px;
+    }
+
+    .fable-profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fable-profile-field-wide {
+        grid-column: auto;
+    }
+
+    .fable-profile-footer {
+        align-items: stretch;
+        flex-direction: column;
+        padding: 10px 12px max(10px, env(safe-area-inset-bottom));
+    }
+
+    .fable-profile-footer > span {
+        display: none;
+    }
+
+    .fable-profile-footer > div > button {
+        flex: 1;
+    }
+
+    body.fable-friendly-ui #sheld {
+        top: var(--fable-header-height);
+        left: 0;
+        width: 100dvw;
+        height: calc(100dvh - var(--fable-header-height));
+        max-height: calc(100dvh - var(--fable-header-height));
+    }
+
+    body.fable-friendly-ui #chat {
+        padding-inline: 8px;
+    }
+
+    body.fable-friendly-ui .welcomePanel {
+        padding-inline: 2px;
+    }
+
+    body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat {
+        gap: 9px;
+        padding: 9px;
+    }
+
+    body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat .avatar,
+    body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat .avatar img {
+        width: 44px;
+        height: 44px;
+    }
+
+    body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat .chatDate,
+    body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat .chatActions,
+    body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat .chatStats {
+        display: none;
+    }
+
+    body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat .chatName > span {
+        display: none;
+    }
+
+    body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat .chatMessageContainer {
+        min-width: 0;
+    }
+
+    body.fable-friendly-ui .welcomeRecent .recentChatList .recentChat .chatMessageContainer .chatMessage {
+        min-width: 0;
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    body.fable-friendly-ui #chat .mes[is_user="true"] {
+        padding-left: 8%;
+    }
+
+    body.fable-friendly-ui #form_sheld {
+        padding: 0 8px 8px;
+    }
+
+    body.fable-friendly-ui .fillLeft {
+        left: 0;
+        width: 94dvw;
+    }
+}

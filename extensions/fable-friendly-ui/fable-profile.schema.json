@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:fable-friendly-ui:schema:profile:v2",
+  "title": "Fable Character Profile",
+  "description": "Optional local roleplay preferences stored in data.extensions.fable on a SillyTavern character card.",
+  "type": "object",
+  "required": ["version", "identity", "speech", "relationship", "roleplay"],
+  "properties": {
+    "version": { "const": 2 },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "gender": { "type": "string" },
+        "age": { "type": "string" },
+        "occupation": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "speech": {
+      "type": "object",
+      "properties": {
+        "selfReference": { "type": "string" },
+        "userAddress": { "type": "string" },
+        "sentenceEnding": { "type": "string" },
+        "tone": { "type": "string" },
+        "catchphrase": { "type": "string" },
+        "avoidWords": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "relationship": {
+      "type": "object",
+      "properties": {
+        "type": { "type": "string" },
+        "closeness": { "type": "string" },
+        "boundaries": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "roleplay": {
+      "type": "object",
+      "properties": {
+        "scenario": { "type": "string" },
+        "goals": { "type": "string" },
+        "secrets": { "type": "string" },
+        "responseStyle": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "localizations": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["tagline", "description", "sourceHash"],
+        "properties": {
+          "tagline": { "type": "string" },
+          "description": { "type": "string" },
+          "sourceHash": { "type": "string" },
+          "updatedAt": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}
